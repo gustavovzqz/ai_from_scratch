@@ -1,2 +1,4 @@
 (test
- (name test_ai_from_scratch))
+ (name test_ai_from_scratch)
+ (libraries ai_from_scratch))
+
