@@ -1,4 +1,0 @@
-(lang dune 3.16)
-(name ai_from_scratch)
-(sections (lib .) (bin ../../bin))
-(files (lib (META dune-package opam)) (bin (ai_from_scratch)))

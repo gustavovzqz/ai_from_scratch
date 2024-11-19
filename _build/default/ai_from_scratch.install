@@ -1,8 +1,0 @@
-lib: [
-  "_build/install/default/lib/ai_from_scratch/META"
-  "_build/install/default/lib/ai_from_scratch/dune-package"
-  "_build/install/default/lib/ai_from_scratch/opam"
-]
-bin: [
-  "_build/install/default/bin/ai_from_scratch"
-]

@@ -1,4 +1,0 @@
-(executable
- (public_name ai_from_scratch)
- (name main)
- (libraries ai_from_scratch))

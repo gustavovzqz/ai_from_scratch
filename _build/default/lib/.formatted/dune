@@ -1,3 +1,0 @@
-(library
- (name ai_from_scratch)
- (libraries core_kernel.pairing_heap))
