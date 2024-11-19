@@ -1,7 +1,7 @@
 open Ai_from_scratch
 open Graph
 
-let graph =
+let g =
   Graph.init
     [ "Arad"
     ; "Bucharest"
@@ -51,32 +51,33 @@ let heuristics =
 ;;
 
 let () =
-  Graph.add_edge ("Arad", "Zerind") 75.0 graph;
-  Graph.add_edge ("Zerind", "Oradea") 71.0 graph;
-  Graph.add_edge ("Oradea", "Sibiu") 151.0 graph;
-  Graph.add_edge ("Sibiu", "Arad") 140.0 graph;
-  Graph.add_edge ("Arad", "Timisoara") 118.0 graph;
-  Graph.add_edge ("Timisoara", "Lugoj") 111.0 graph;
-  Graph.add_edge ("Lugoj", "Mehadia") 70.0 graph;
-  Graph.add_edge ("Mehadia", "Dobreta") 75.0 graph;
-  Graph.add_edge ("Dobreta", "Craiova") 120.0 graph;
-  Graph.add_edge ("Craiova", "Rimnicu Vilcea") 146.0 graph;
-  Graph.add_edge ("Rimnicu Vilcea", "Sibiu") 80.0 graph;
-  Graph.add_edge ("Sibiu", "Fagaras") 99.0 graph;
-  Graph.add_edge ("Fagaras", "Bucharest") 211.0 graph;
-  Graph.add_edge ("Bucharest", "Pitesti") 101.0 graph;
-  Graph.add_edge ("Pitesti", "Rimnicu Vilcea") 97.0 graph;
-  Graph.add_edge ("Craiova", "Pitesti") 138.0 graph;
-  Graph.add_edge ("Pitesti", "Bucharest") 101.0 graph;
-  Graph.add_edge ("Bucharest", "Giurgiu") 90.0 graph;
-  Graph.add_edge ("Bucharest", "Urziceni") 85.0 graph;
-  Graph.add_edge ("Urziceni", "Hirsova") 98.0 graph;
-  Graph.add_edge ("Hirsova", "Eforie") 86.0 graph;
-  Graph.add_edge ("Urziceni", "Vaslui") 142.0 graph;
-  Graph.add_edge ("Vaslui", "Iasi") 92.0 graph;
-  Graph.add_edge ("Iasi", "Neamt") 87.0 graph;
+  Graph.add_edge ("Arad", "Zerind") 75.0 g;
+  Graph.add_edge ("Zerind", "Oradea") 71.0 g;
+  Graph.add_edge ("Oradea", "Sibiu") 151.0 g;
+  Graph.add_edge ("Sibiu", "Arad") 140.0 g;
+  Graph.add_edge ("Arad", "Timisoara") 118.0 g;
+  Graph.add_edge ("Timisoara", "Lugoj") 111.0 g;
+  Graph.add_edge ("Lugoj", "Mehadia") 70.0 g;
+  Graph.add_edge ("Mehadia", "Dobreta") 75.0 g;
+  Graph.add_edge ("Dobreta", "Craiova") 120.0 g;
+  Graph.add_edge ("Craiova", "Rimnicu Vilcea") 146.0 g;
+  Graph.add_edge ("Rimnicu Vilcea", "Sibiu") 80.0 g;
+  Graph.add_edge ("Sibiu", "Fagaras") 99.0 g;
+  Graph.add_edge ("Fagaras", "Bucharest") 211.0 g;
+  Graph.add_edge ("Bucharest", "Pitesti") 101.0 g;
+  Graph.add_edge ("Pitesti", "Rimnicu Vilcea") 97.0 g;
+  Graph.add_edge ("Craiova", "Pitesti") 138.0 g;
+  Graph.add_edge ("Pitesti", "Bucharest") 101.0 g;
+  Graph.add_edge ("Bucharest", "Giurgiu") 90.0 g;
+  Graph.add_edge ("Bucharest", "Urziceni") 85.0 g;
+  Graph.add_edge ("Urziceni", "Hirsova") 98.0 g;
+  Graph.add_edge ("Hirsova", "Eforie") 86.0 g;
+  Graph.add_edge ("Urziceni", "Vaslui") 142.0 g;
+  Graph.add_edge ("Vaslui", "Iasi") 92.0 g;
+  Graph.add_edge ("Iasi", "Neamt") 87.0 g;
   let _h node = heuristics.(node.id) in
   let h _node = 0. in
-  let path = Search.a_star graph graph.graph.(0).node graph.graph.(1).node h in
-  List.iter (Printf.printf "%s ") path
+  let path = Search.a_star g g.graph.(0).node g.graph.(1).node h in
+  List.iter (Printf.printf "%s ") path;
+  print_endline ""
 ;;
