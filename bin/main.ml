@@ -75,9 +75,14 @@ let () =
   Graph.add_edge ("Urziceni", "Vaslui") 142.0 g;
   Graph.add_edge ("Vaslui", "Iasi") 92.0 g;
   Graph.add_edge ("Iasi", "Neamt") 87.0 g;
-  let _h node = heuristics.(node.id) in
-  let h _node = 0. in
-  let path = Search.a_star g g.graph.(0).node g.graph.(1).node h in
-  List.iter (Printf.printf "%s ") path;
+  let h node = heuristics.(node.id) in
+  let path1 = Search.dijkstra g g.graph.(0).node g.graph.(1).node in
+  let path2 = Search.gbfs g g.graph.(0).node g.graph.(1).node h in
+  let path3 = Search.a_star g g.graph.(0).node g.graph.(1).node h in
+  List.iter (Printf.printf "%s ") path1;
+  print_endline "";
+  List.iter (Printf.printf "%s ") path2;
+  print_endline "";
+  List.iter (Printf.printf "%s ") path3;
   print_endline ""
 ;;
