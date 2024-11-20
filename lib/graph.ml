@@ -31,6 +31,22 @@ let init (info_list : 'a list) : 'a t =
   { graph; name_map }
 ;;
 
+let init_int_len size =
+  let graph =
+    Array.init size (fun i -> { node = { id = i; data = i }; adj_list = [] })
+  in
+  let name_map = Hashtbl.create size in
+  let rec loop i cap =
+    if i = cap
+    then ()
+    else (
+      Hashtbl.add name_map i i;
+      loop (i + 1) cap)
+  in
+  loop 0 (size - 1);
+  { graph; name_map }
+;;
+
 (* TODO: Parse functions to get a graph by a file *)
 
 let get_index (node_data : 'a) (graph_struct : 'a t) : int =
@@ -60,4 +76,35 @@ let add_edge_directed (source_data, dest_data) weight (graph_struct : 'a t) =
 let add_edge (source_data, dest_data) weight (graph_struct : 'a t) =
   add_edge_directed (source_data, dest_data) weight graph_struct;
   add_edge_directed (dest_data, source_data) weight graph_struct
+;;
+
+let parse_line string =
+  let string_list = String.split_on_char ' ' string in
+  match string_list with
+  | h1 :: h2 :: h3 :: _ ->
+    int_of_string h1, int_of_string h2, float_of_string h3
+  | _ -> assert false
+;;
+
+let init_by_file path =
+  let file = open_in path in
+  let rec read_file list =
+    try
+      let line = input_line file in
+      let input_value = parse_line line in
+      read_file (input_value :: list)
+    with
+    | End_of_file -> list
+  in
+  let values = read_file [] in
+  let g = init_int_len (List.length values) in
+  let rec add_edges edge_list =
+    match edge_list with
+    | (source, dest, weight) :: t ->
+      add_edge_directed (source, dest) weight g;
+      add_edges t
+    | _ -> ()
+  in
+  add_edges values;
+  g
 ;;
