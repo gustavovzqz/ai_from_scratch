@@ -76,9 +76,11 @@ let () =
   Graph.add_edge ("Vaslui", "Iasi") 92.0 g;
   Graph.add_edge ("Iasi", "Neamt") 87.0 g;
   let h node = heuristics.(node.id) in
-  let path1 = Search.dijkstra g g.graph.(0).node g.graph.(1).node in
-  let path2 = Search.gbfs g g.graph.(0).node g.graph.(1).node h in
-  let path3 = Search.a_star g g.graph.(0).node g.graph.(1).node h in
+  let fst_node = get_node "Arad" g
+  and snd_node = get_node "Bucharest" g in
+  let path1 = Search.dijkstra g fst_node snd_node in
+  let path2 = Search.gbfs g fst_node snd_node h in
+  let path3 = Search.a_star g fst_node snd_node h in
   let expected_dijkstra =
     [ "Arad"; "Sibiu"; "Rimnicu Vilcea"; "Pitesti"; "Bucharest" ]
   in

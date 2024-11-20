@@ -18,6 +18,7 @@ type 'a t =
   ; name_map : ('a, int) Hashtbl.t
   }
 
+(* TODO: Check for duplicates *)
 let init (info_list : 'a list) : 'a t =
   let info_array = Array.of_list info_list in
   let info_size = Array.length info_array in
@@ -30,8 +31,18 @@ let init (info_list : 'a list) : 'a t =
   { graph; name_map }
 ;;
 
+(* TODO: Parse functions to get a graph by a file *)
+
 let get_index (node_data : 'a) (graph_struct : 'a t) : int =
   try Hashtbl.find graph_struct.name_map node_data with
+  | Not_found -> failwith "Node not found"
+;;
+
+let get_node (node_data : 'a) (graph_struct : 'a t) : 'a node =
+  try
+    let id = Hashtbl.find graph_struct.name_map node_data in
+    graph_struct.graph.(id).node
+  with
   | Not_found -> failwith "Node not found"
 ;;
 
