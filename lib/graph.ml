@@ -47,8 +47,6 @@ let init_int_len size =
   { graph; name_map }
 ;;
 
-(* TODO: Parse functions to get a graph by a file *)
-
 let get_index (node_data : 'a) (graph_struct : 'a t) : int =
   try Hashtbl.find graph_struct.name_map node_data with
   | Not_found -> failwith "Node not found"
